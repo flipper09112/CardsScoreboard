@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#2c3e50</color>
+	<color name="colorPrimaryDark">#1B3147</color>
+	<color name="colorAccent">#3498db</color>
+
+	<color name="gradient_1">#D5D7F2</color>
+	<color name="gradient_2">#E9EFF2</color>
+	<color name="gradient_3">#D91604</color>
+	<color name="gradient_4">#D95A4E</color>
+	<color name="gradient_5">#0D0D0D</color>
+
+	<!--Title colors-->
+	<color name="titlePageTextColor">@color/gradient_1</color>
+
+	<color name="selected_green">#4ABC96</color>
+	<color name="table_line_color">@android:color/white</color>
+	<color name="backgroundColor">@android:color/black</color>
+
+</resources>
