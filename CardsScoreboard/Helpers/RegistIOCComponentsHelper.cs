@@ -41,6 +41,7 @@ namespace CardsScoreboard.Helpers
 
         private static void RegistViewModels(ContainerBuilder builder)
         {
+            builder.RegisterType<MatchWinnerViewModel>().InstancePerDependency();
             builder.RegisterType<HomePageViewModel>().InstancePerDependency();
             builder.RegisterType<ChooseGameViewModel>().InstancePerDependency();
             builder.RegisterType<ChoosePlayersViewModel>().InstancePerDependency();

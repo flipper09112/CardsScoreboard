@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.CardView.Widget;
 using AndroidX.RecyclerView.Widget;
+using CardsScoreboard.Helpers;
 using CardsScoreboard.UI.Adapters.AddGame;
 using CardsScoreboard.UI.Adapters.Match;
 using CardsScoreboard.UI.Fragments.Base;
@@ -26,6 +27,7 @@ namespace CardsScoreboard.UI.Fragments.Matchs
         private RecyclerView _roundsRv;
         private RecyclerView _playersRv;
         private Button _addRoundButton;
+        private TextView _otherOptionsLabel;
         private MatchPlayersAdapter _playersAdapter;
         private HeartsRoundsAdapter _roundsAdapter;
         private AddRoundBottomSheetDialog bottomSheetDialog;
@@ -42,6 +44,7 @@ namespace CardsScoreboard.UI.Fragments.Matchs
             _roundsRv = _view.FindViewById<RecyclerView>(Resource.Id.roundsRv);
             _playersRv = _view.FindViewById<RecyclerView>(Resource.Id.playersRv);
             _addRoundButton = _view.FindViewById<Button>(Resource.Id.addRoundButton);
+            _otherOptionsLabel = _view.FindViewById<TextView>(Resource.Id.otherOptionsLabel);
 
             _playersRv.SetLayoutManager(new LinearLayoutManager(Context));
             _roundsRv.SetLayoutManager(new LinearLayoutManager(Context, LinearLayoutManager.Horizontal, false));
@@ -74,11 +77,24 @@ namespace CardsScoreboard.UI.Fragments.Matchs
         public override void SetupBindings()
         {
             _addRoundButton.Click += AddRoundButtonClick;
+            _otherOptionsLabel.Click += OtherOptionsLabelClick;
+            ViewModel.ShowWinnerPage += ShowWinnerPage;
         }
 
         public override void CleanBindings()
         {
             _addRoundButton.Click -= AddRoundButtonClick;
+            _otherOptionsLabel.Click -= OtherOptionsLabelClick;
+            ViewModel.ShowWinnerPage -= ShowWinnerPage;
+        }
+
+        private void ShowWinnerPage(object sender, EventArgs e)
+        {
+            FragmentHelper.ShowFragment(this, new MatchWinnerFragment());
+        }
+
+        private void OtherOptionsLabelClick(object sender, EventArgs e)
+        {
         }
 
         protected override void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -18,7 +18,6 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
@@ -123,6 +122,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\Matchs\HeartsMatchViewModel.cs" />
+    <Compile Include="UI\Fragments\Matchs\MatchWinnerFragment.cs" />
+    <Compile Include="ViewModel\Matchs\MatchWinnerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\ic_home_lottie_3.json" />
@@ -135,6 +136,11 @@
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\font\arista_pro_bold.ttf" />
     <AndroidResource Include="Resources\font\arista_pro_light.ttf" />
+    <AndroidAsset Include="Assets\fire.json" />
+    <AndroidResource Include="Resources\layout\MatchWinnerFragment.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_main.xml">

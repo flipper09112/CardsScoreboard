@@ -32,7 +32,7 @@ namespace CardsScoreboard.UI.Adapters.Match
         {
             if(holder is HeartsRoundItemViewHolder roundItemVH)
             {
-                roundItemVH.Bind(Rounds[holder.AbsoluteAdapterPosition], _players);
+                roundItemVH.Bind(Rounds[holder.AbsoluteAdapterPosition], _players, holder.AbsoluteAdapterPosition == (ItemCount - 1) && holder.AbsoluteAdapterPosition != 0);
             }
         }
 

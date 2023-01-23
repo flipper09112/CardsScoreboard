@@ -22,6 +22,9 @@ namespace CardsScoreboard.ViewModel.Matchs
 
         public List<Player> Players => _matchManagerService.MatchSelected.GamePlayers;
         public List<Round> Rounds => _matchManagerService.MatchSelected.Rounds;
+        public HeartsMatch Match => _matchManagerService.MatchSelected as HeartsMatch;
+
+        public EventHandler ShowWinnerPage;
 
         public string AddRoundBtText { get; internal set; }
         public ICommand AddRoundCommand { get; }
@@ -60,8 +63,8 @@ namespace CardsScoreboard.ViewModel.Matchs
         private void AddRound()
         {
             List<MatchPlayerRound> listPoints = new List<MatchPlayerRound>();
-            
-            foreach(var newRoundItem in NewRoundModel)
+
+            foreach (var newRoundItem in NewRoundModel)
             {
                 listPoints.Add(new MatchPlayerRound()
                 {
@@ -75,6 +78,11 @@ namespace CardsScoreboard.ViewModel.Matchs
                 RoundNumber = Rounds.Count,
                 Rounds = listPoints
             });
+
+            if (listPoints.Any(item => item.PlayerPoints >= Match.GamePoints))
+            {
+                ShowWinnerPage?.Invoke(null, null);
+            }
 
             RaisePropertyChanged(nameof(Rounds));
         }

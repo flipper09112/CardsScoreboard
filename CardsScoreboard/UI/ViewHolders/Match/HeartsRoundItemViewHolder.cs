@@ -29,11 +29,15 @@ namespace CardsScoreboard.UI.ViewHolders.Match
             _roundValuesRv.SetLayoutManager(new LinearLayoutManager(itemView.Context));
         }
 
-        internal void Bind(Round round, List<Player> players)
+        internal void Bind(Round round, List<Player> players, bool lastRound)
         {
             _roundNumber.Text = "#" + round.RoundNumber;
 
-            _adapter = new HeartsRoundValuesAdapter(round.Rounds, players);
+            _adapter = new HeartsRoundValuesAdapter(round.Rounds,
+                                                    players,
+                                                    round.Rounds.Min(item => item.PlayerPoints),
+                                                    round.Rounds.Max(item => item.PlayerPoints),
+                                                    lastRound);
             _roundValuesRv.SetAdapter(_adapter);
         }
     }

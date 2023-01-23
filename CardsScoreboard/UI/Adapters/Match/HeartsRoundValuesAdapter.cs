@@ -19,11 +19,21 @@ namespace CardsScoreboard.UI.Adapters.Match
     {
         private List<Player> _players;
         private List<MatchPlayerRound> rounds;
+        private int _minValueLastRound;
+        private int _maxValueLastRound;
+        private bool _lastRound;
 
-        public HeartsRoundValuesAdapter(List<MatchPlayerRound> rounds, List<Player> players)
+        public HeartsRoundValuesAdapter(List<MatchPlayerRound> rounds,
+                                        List<Player> players,
+                                        int minValueLastRound,
+                                        int maxValueLastRound,
+                                        bool lastRound)
         {
             _players = players;
             this.rounds = rounds;
+            _minValueLastRound = minValueLastRound;
+            _maxValueLastRound = maxValueLastRound;
+            _lastRound = lastRound;
         }
 
         public override int ItemCount => rounds?.Count ?? 0;
@@ -34,7 +44,10 @@ namespace CardsScoreboard.UI.Adapters.Match
             {
                 var player = _players[holder.AbsoluteAdapterPosition];
                 var points = rounds.Find(item => item.PlayerId == player.Id).PlayerPoints;
-                heartsRoundValueItemVH.Bind(points);
+                heartsRoundValueItemVH.Bind(points,
+                                            _lastRound,
+                                            _minValueLastRound,
+                                            _maxValueLastRound);
             }
         }
 
