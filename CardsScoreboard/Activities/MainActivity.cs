@@ -19,6 +19,7 @@ using CardsScoreboard.UI.Fragments.AddGame;
 using Google.Android.Material.BottomAppBar;
 using Plugin.CurrentActivity;
 using Android.Window;
+using CardsScoreboard.UI.Fragments.Matchs;
 
 namespace CardsScoreboard
 {
@@ -119,7 +120,14 @@ namespace CardsScoreboard
 
         public override void OnBackPressed()
         {
-            //BackPressed?.Invoke(null, null);
+            var fragmentInstance = SupportFragmentManager.FindFragmentById(Resource.Id.fragment_container);
+            
+            if (fragmentInstance is MatchWinnerFragment)
+            {
+                BackPressed?.Invoke(null, null);
+                return;
+            }
+
             base.OnBackPressed();
         }
     }

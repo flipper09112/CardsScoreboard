@@ -18,8 +18,10 @@ namespace CardsScoreboard.Models.Match
         public int GamePoints { get; protected set; }
         public List<Player> GamePlayers { get; protected set; }
         public DateTime MatchCreatedDate { get; protected set; }
-        public DateTime MatchEndedDate { get; protected set; }
+        public DateTime MatchEndedDate { get; internal set; }
         public List<Round> Rounds { get; protected set; }
+        public Player Winner { get; internal set; }
+        public Player BiggerLoser { get; internal set; }
     }
 
     public class HeartsMatch : Match

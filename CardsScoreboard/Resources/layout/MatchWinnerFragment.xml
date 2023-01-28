@@ -7,12 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <View
         android:id="@+id/divider10"
         android:layout_width="478dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,10 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Winner"
+        android:fontFamily="@font/arista_pro_bold"
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,27 +34,33 @@
         android:id="@+id/divider11"
         android:layout_width="1dp"
         android:layout_height="837dp"
+        android:visibility="invisible"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/winnerPlayerIcon"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="40dp"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="winner.json"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        android:src="@drawable/ic_avatar_10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/container_15dp"
         app:layout_constraintBottom_toTopOf="@+id/divider10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -81,7 +90,8 @@
             android:layout_width="0dp"
             android:layout_height="76dp"
             android:gravity="center"
-            android:textSize="14sp"
+            android:textSize="20sp"
+            android:fontFamily="@font/arista_pro_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/divider3"
             app:layout_constraintStart_toEndOf="@+id/divider"
@@ -98,6 +108,109 @@
 
         <View
             android:id="@+id/divider3"
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/finishBt"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="Finish Game"
+        android:layout_marginBottom="40dp"
+        app:backgroundTint="@null"
+        style="@style/ConfirmButtonStyle"
+        android:background="@drawable/green_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Biggest loser"
+        android:fontFamily="@font/arista_pro_bold"
+        android:layout_marginTop="20dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loserPlayerIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="explosion.json"
+        app:lottie_loop="true" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/container_15dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toTopOf="@+id/finishBt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:id="@+id/d1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/playerLoserIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/d2"
+            app:layout_constraintEnd_toStartOf="@+id/d1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/playerLoserName"
+            android:layout_width="0dp"
+            android:layout_height="76dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/arista_pro_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/d3"
+            app:layout_constraintStart_toEndOf="@+id/d1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/d2"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerLoserIcon" />
+
+        <View
+            android:id="@+id/d3"
             android:layout_width="4dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

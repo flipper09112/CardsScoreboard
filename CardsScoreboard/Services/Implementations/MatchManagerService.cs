@@ -39,6 +39,14 @@ namespace CardsScoreboard.Services.Implementations
             },
         });
 
+        public void FinishGame(HeartsMatch match, Player playerWinner, Player biggerLoser)
+        {
+            match.MatchEndedDate = DateTime.Now;
+            match.Winner = playerWinner;
+            match.BiggerLoser = biggerLoser;
+            //TODO save in DB
+        }
+
         public void SetMatchSelected(Match match)
         {
             MatchSelected = match;

@@ -21,7 +21,7 @@ using System.Text;
 
 namespace CardsScoreboard.UI.Fragments.Matchs
 {
-    public class HeartsMatchFragment : BaseFragment<HeartsMatchViewModel>
+    public class HeartsMatchFragment : BaseFragment<HeartsMatchViewModel>, IDialogInterfaceOnClickListener
     {
         private View _view;
         private RecyclerView _roundsRv;
@@ -95,6 +95,13 @@ namespace CardsScoreboard.UI.Fragments.Matchs
 
         private void OtherOptionsLabelClick(object sender, EventArgs e)
         {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Context);
+            builder.SetTitle("Other Options");
+
+            builder.SetItems(new List<string>() { "Remove last round" }.ToArray(), this);
+
+            // Mostrar o diálogo
+            builder.Show();
         }
 
         protected override void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -126,6 +133,29 @@ namespace CardsScoreboard.UI.Fragments.Matchs
             ViewModel.NewRoundModel = null;
             bottomSheetDialog = new AddRoundBottomSheetDialog(ViewModel.NewRoundModel, ViewModel.AddRoundCommand);
             bottomSheetDialog.Show(Activity.SupportFragmentManager, bottomSheetDialog.Tag);
+        }
+
+        public void OnClick(IDialogInterface dialog, int which)
+        {
+            dialog.Dismiss();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(Context);
+            builder.SetTitle("Confirm action");
+            builder.SetMessage("You have sure that want clear last round inserted?");
+
+            builder.SetPositiveButton("Yes", (sender, e) =>
+            {
+                ViewModel.RemoveLastRoundCommand.Execute(null);
+            });
+
+            builder.SetNegativeButton("Cancel", (sender, e) =>
+            {
+                //Do nothing
+            });
+
+            // Mostrar o diálogo
+            builder.Show();
+
         }
     }
 }

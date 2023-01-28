@@ -28,6 +28,7 @@ namespace CardsScoreboard.ViewModel.Matchs
 
         public string AddRoundBtText { get; internal set; }
         public ICommand AddRoundCommand { get; }
+        public ICommand RemoveLastRoundCommand { get; }
 
         public HeartsMatchViewModel(IMatchManagerService matchManagerService)
         {
@@ -36,6 +37,15 @@ namespace CardsScoreboard.ViewModel.Matchs
             AddRoundBtText = "Add round";
 
             AddRoundCommand = new DelegateCommand(AddRound, CanAddRound);
+            RemoveLastRoundCommand = new DelegateCommand(RemoveLastRound);
+        }
+
+        private void RemoveLastRound()
+        {
+            if(_matchManagerService.MatchSelected.Rounds.Count > 1)
+                _matchManagerService.MatchSelected.Rounds.RemoveAt(_matchManagerService.MatchSelected.Rounds.Count - 1);
+
+            RaisePropertyChanged(nameof(Rounds));
         }
 
         private List<NewRoundModel> _newRoundModel;
@@ -48,7 +58,8 @@ namespace CardsScoreboard.ViewModel.Matchs
                     _newRoundModel = Players.Select(item => new NewRoundModel() { Player = item,
                                                                                   AddPointCommand = AddPointAction, 
                                                                                   MinusPointCommand = MinusPointAction,
-                                                                                  SelectQueenCommand = SelectQueenAction
+                                                                                  SelectQueenCommand = SelectQueenAction,
+                                                                                  SelectPoints = SelectPoints
                     }).ToList();
                 }
 
@@ -81,6 +92,12 @@ namespace CardsScoreboard.ViewModel.Matchs
 
             if (listPoints.Any(item => item.PlayerPoints >= Match.GamePoints))
             {
+                var maxPoint = listPoints.Max(item => item.PlayerPoints);
+                var minPoint = listPoints.Min(item => item.PlayerPoints);
+                var playerIdMax = listPoints.Find(item => item.PlayerPoints == maxPoint).PlayerId;
+                var playerIdMin = listPoints.Find(item => item.PlayerPoints == minPoint).PlayerId;
+
+                _matchManagerService.FinishGame(Match, Players.Find(item => item.Id == playerIdMax), Players.Find(item => item.Id == playerIdMin));
                 ShowWinnerPage?.Invoke(null, null);
             }
 
@@ -110,11 +127,17 @@ namespace CardsScoreboard.ViewModel.Matchs
             RaisePropertyChanged(nameof(NewRoundModel));
         }
 
+        private void SelectPoints(NewRoundModel newRoundModel, int newValue)
+        {
+            newRoundModel.HeartsPoints = newValue;
+            RaisePropertyChanged(nameof(NewRoundModel));
+        }
+
         private void MinusPointAction(NewRoundModel newRoundModel)
         {
             if (newRoundModel.HeartsPoints == 0) return;
 
-            newRoundModel.HeartsPoints += 1;
+            newRoundModel.HeartsPoints -= 1;
             RaisePropertyChanged(nameof(NewRoundModel));
         }
         
@@ -136,5 +159,6 @@ namespace CardsScoreboard.ViewModel.Matchs
         public Action<NewRoundModel> AddPointCommand { get; internal set; }
         public Action<NewRoundModel> MinusPointCommand { get; internal set; }
         public Action<NewRoundModel, bool> SelectQueenCommand { get; internal set; }
+        public Action<NewRoundModel, int> SelectPoints { get; internal set; }
     }
 }

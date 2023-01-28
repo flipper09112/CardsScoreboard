@@ -38,6 +38,17 @@ namespace CardsScoreboard.UI.ViewHolders.Match
 
             _checkBox.CheckedChange -= CheckBoxClick;
             _checkBox.CheckedChange += CheckBoxClick;
+
+            _editTextNumber.TextChanged -= EditTextNumberTextChanged;
+            _editTextNumber.TextChanged += EditTextNumberTextChanged;
+        }
+
+        private void EditTextNumberTextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(e.Text.ToString()))
+                _newRoundModel.SelectPoints.Invoke(_newRoundModel, 0);
+            else
+                _newRoundModel.SelectPoints.Invoke(_newRoundModel, int.Parse(e.Text.ToString()));
         }
 
         private void CheckBoxClick(object sender, CompoundButton.CheckedChangeEventArgs e)

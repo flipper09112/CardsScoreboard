@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using CardsScoreboard.Models.General;
 using CardsScoreboard.Models.Match;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace CardsScoreboard.Services.Interfaces
     {
         Match MatchSelected { get; }
 
+        void FinishGame(HeartsMatch match, Player winner, Player biggerLoser);
         void SetMatchSelected(Match match);
     }
 }
